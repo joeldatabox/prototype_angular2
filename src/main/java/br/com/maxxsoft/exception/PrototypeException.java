@@ -1,8 +1,10 @@
 package br.com.maxxsoft.exception;
 
+import ch.qos.logback.core.status.StatusUtil;
 import org.springframework.http.HttpStatus;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,11 +30,16 @@ public class PrototypeException extends RuntimeException {
     }
 
     public PrototypeException(String message) {
+        this(message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    public PrototypeException(String message, HttpStatus status) {
         super(message);
         this.message = message;
         this.objectName = "unknow :(";
-        this.status = HttpStatus.INTERNAL_SERVER_ERROR;
+        this.status = status;
     }
+
 
     public PrototypeException(String message, Throwable cause) {
         super(message, cause);
@@ -58,5 +65,24 @@ public class PrototypeException extends RuntimeException {
     @Override
     public String getMessage() {
         return message;
+    }
+
+    public PrototypeException addDetails(String key, Object value) {
+        this.details.put(key, value);
+        return this;
+    }
+
+    public PrototypeException addDetails(String key, List<Object> value) {
+        this.details.put(key, value);
+        return this;
+    }
+
+    public PrototypeException addDetails(Map<String, Object> details) {
+        this.details.putAll(details);
+        return this;
+    }
+
+    public boolean containsDetais() {
+        return !this.details.isEmpty();
     }
 }

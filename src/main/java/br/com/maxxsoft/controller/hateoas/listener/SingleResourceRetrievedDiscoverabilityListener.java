@@ -1,7 +1,7 @@
 package br.com.maxxsoft.controller.hateoas.listener;
 
-import br.com.dreams.controller.hateoas.event.SingleResourceRetrievedEvent;
-import br.com.dreams.util.LinkUtil;
+import br.com.maxxsoft.controller.hateoas.event.SingleResourceRetrievedEvent;
+import br.com.maxxsoft.util.LinkUtil;
 import com.google.common.base.Preconditions;
 import com.google.common.net.HttpHeaders;
 import org.springframework.context.ApplicationListener;

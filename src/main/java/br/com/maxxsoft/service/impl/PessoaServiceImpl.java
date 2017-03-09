@@ -1,12 +1,19 @@
 package br.com.maxxsoft.service.impl;
 
+import br.com.maxxsoft.exception.PrototypeBadRequestException;
+import br.com.maxxsoft.exception.PrototypeConflictException;
+import br.com.maxxsoft.exception.PrototypeNoContentException;
+import br.com.maxxsoft.exception.PrototypeNotFoundException;
+import br.com.maxxsoft.model.Model;
 import br.com.maxxsoft.model.Pessoa;
 import br.com.maxxsoft.repository.PessoaRepository;
 import br.com.maxxsoft.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.el.PropertyNotFoundException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by master on 08/03/17.
@@ -18,57 +25,62 @@ public class PessoaServiceImpl implements PessoaService {
 
     @Override
     public Pessoa save(Pessoa pessoa) {
-        return null;
+        return merge(pessoa);
     }
 
     @Override
     public boolean remove(Pessoa pessoa) {
-        return false;
+        repository.delete(pessoa);
+        return true;
     }
 
     @Override
     public Pessoa update(Pessoa pessoa) {
-        return null;
+        return merge(pessoa);
     }
 
     @Override
     public Pessoa findById(String id) {
-        return null;
+        return repository.findOne(id);
     }
 
     @Override
     public List<Pessoa> findAll() {
-        return null;
+        return repository.findAll();
     }
 
     @Override
     public Pessoa findByCpf(String cpf) {
-        return repository.findByCpf(cpf);
+        Pessoa pessoa = repository.findByCpf(cpf);
+        if (pessoa == null) {
+            throw new PrototypeNotFoundException(Pessoa.class, "cpf", "registro não encontrado");
+        }
+        return pessoa;
     }
 
     private Pessoa merge(Pessoa pessoa) {
         if (pessoa.getId() == null) {
-            //verificando se a conta já existe
-            Pessoa other = null;
+            //verificando se o cpf já existe
             try {
-                other = findByDescricao(pessoa.getDescricao(), pessoa.getUser());
-                throw new DreamsConflictException(Conta.class, "descricao", "já existe um registro com essa descrição \"" + pessoa.getDescricao() + "\'");
-            } catch (DreamsNotFoundException ex) {
+                findByCpf(pessoa.getCpf());
+                throw new PrototypeConflictException(Pessoa.class, "cpf", "já existe um registro com esse CPF \"" + pessoa.getCpf() + "\'");
+            } catch (PrototypeNotFoundException ex) {
             }
             return repository.save(pessoa);
         } else {
-            Conta other = findById(pessoa.getId());
-            //não pode-se alterar o usuário
-            if (!other.equals(pessoa)) {
-                throw new DreamsBadRequestException(Conta.class, "user", "não é possível fazer a alteração do usuário dono da conta");
-            }
-            //verificando se o nome alterado já existe
-            try {
-                other = findByDescricao(pessoa.getDescricao(), pessoa.getUser());
-                throw new DreamsConflictException(Conta.class, "descricao", "já existe um registro com essa descrição \"" + pessoa.getDescricao() + "\'");
-            } catch (DreamsNotFoundException ex) {
-            }
             return repository.save(pessoa);
         }
+    }
+
+    @Override
+    public Long count(Map<String, String> allRequestParams) {
+        return repository.count(allRequestParams);
+    }
+
+    @Override
+    public List<Pessoa> findAll(Map<String, String> allRequestParams) {
+        List<Pessoa> records = repository.findAll(allRequestParams);
+        if (records == null || records.isEmpty()) throw new PrototypeNoContentException(Pessoa.class, null, "records notfound");
+        return repository.findAll(allRequestParams);
     }
 }

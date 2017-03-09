@@ -1,6 +1,6 @@
 package br.com.maxxsoft.controller.hateoas.event;
 
-import br.com.dreams.model.Model;
+import br.com.maxxsoft.model.Model;
 import org.springframework.context.ApplicationEvent;
 
 import javax.servlet.http.HttpServletResponse;

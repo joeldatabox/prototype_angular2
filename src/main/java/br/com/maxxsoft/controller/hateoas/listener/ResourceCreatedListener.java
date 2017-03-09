@@ -1,7 +1,7 @@
 package br.com.maxxsoft.controller.hateoas.listener;
 
 
-import br.com.dreams.controller.hateoas.event.ResourceCreatedEvent;
+import br.com.maxxsoft.controller.hateoas.event.ResourceCreatedEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;

@@ -47,8 +47,9 @@ public class ErrorMessageBuilder {
     public ErrorMessage build(HttpMediaTypeNotSupportedException ex) {
         this.message = new ErrorMessage();
         setStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
-        setMessage(ex.getMessage());
-        addDetails("ContentType", String.valueOf(ex.getContentType()));
+        setMessage(ex.getMessage().replace("'null' ", ""));
+        String contentType = "uninformed";
+        addDetails("ContentType", ex.getContentType() == null ? contentType : ex.getContentType().toString());
         addDetails("SupportedMediaTypes", ex.getSupportedMediaTypes().stream().map(mt -> mt.toString()).collect(Collectors.toList()));
         printException(ex);
         return this.message;

@@ -4,7 +4,8 @@ import br.com.maxxsoft.model.Pessoa;
 
 import java.util.List;
 
-public interface PessoaService {
+public interface PessoaService extends Service<Pessoa> {
+
     Pessoa save(Pessoa pessoa);
 
     boolean remove(Pessoa pessoa);

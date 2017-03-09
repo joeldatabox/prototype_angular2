@@ -15,5 +15,5 @@ public interface PrototypeRepositoryCustom<T, ID extends Serializable> extends M
 
     List<T> findAll(Map<String, String> queryParams);
 
-    // long count(Map<String, String> queryParams);
+    long count(Map<String, String> queryParams);
 }

@@ -36,6 +36,7 @@ public class PrototypeRepositoryImpl<T extends Model, ID extends Serializable> e
         return null;
     }
 
+    @Override
     public long count(Map<String, String> queryParams) {
         return operations.count(QueryBuilder.createQuery(queryParams), CLASS);
     }
