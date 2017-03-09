@@ -1,6 +1,5 @@
 package br.com.maxxsoft.exception;
 
-import ch.qos.logback.core.status.StatusUtil;
 import org.springframework.http.HttpStatus;
 
 import java.util.HashMap;

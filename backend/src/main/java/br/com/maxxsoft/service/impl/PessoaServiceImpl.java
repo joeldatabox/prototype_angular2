@@ -1,17 +1,14 @@
 package br.com.maxxsoft.service.impl;
 
-import br.com.maxxsoft.exception.PrototypeBadRequestException;
 import br.com.maxxsoft.exception.PrototypeConflictException;
 import br.com.maxxsoft.exception.PrototypeNoContentException;
 import br.com.maxxsoft.exception.PrototypeNotFoundException;
-import br.com.maxxsoft.model.Model;
 import br.com.maxxsoft.model.Pessoa;
 import br.com.maxxsoft.repository.PessoaRepository;
 import br.com.maxxsoft.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.el.PropertyNotFoundException;
 import java.util.List;
 import java.util.Map;
 
