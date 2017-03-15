@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h2 class="panel-title">Edição de Registro</h2>
+      </div>
+      <div class="panel-body">
+        <form name="form">
+          <div class="form-group">
+
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon" id="sizing-addon1"><a class="glyphicon glyphicon-user"></a></span>
+              <input [(ngModel)]="pessoa.nome" id="nome" name="nome" type="text" class="form-control" placeholder="Insira seu nome" aria-describedby="sizing-addon1">
+
+            </div>
+            <br/>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="input-group input-group-lg">
+                  <span class="input-group-addon"><a class="glyphicon glyphicon-earphone"></a></span>
+                  <input [(ngModel)]="pessoa.telefone" id="telefone" name="telefone" type="text" class="form-control" placeholder="Telefone" aria-describedby="sizing-addon1">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="input-group input-group-lg">
+                  <span class="input-group-addon" id="sizing-addon15"><a class="glyphicon glyphicon-envelope"></a></span>
+                  <input [(ngModel)]="pessoa.email" id="email" name="email" type="text" class="form-control" placeholder="email@exemplo.com.br" aria-describedby="sizing-addon1">
+                </div>
+              </div>
+            </div>
+            <br/>
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon" id="sizing-addon11"><a class="glyphicon glyphicon-pushpin"></a></span>
+              <input [(ngModel)]="pessoa.nome" id="endereco" name="endereco" type="text" class="form-control" placeholder="Insira seu endereço" aria-describedby="sizing-addon1">
+            </div>
+
+
+          </div>
+          <div class="btn-group btn-group-justified" role="group">
+            <div class="btn-group" role="group">
+              <button [routerLink]="['/pessoas','list']" type="button" class="btn btn-default">Cancelar</button>
+            </div>
+            <div class="btn-group" role="group">
+              <button (click)="submit()" type="button" class="btn btn-primary">Salvar Alteração</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

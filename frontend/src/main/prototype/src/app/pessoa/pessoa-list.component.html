@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h2 class="panel-title">Registros de Clientes</h2>
+      </div>
+      <div class="panel-body">
+        <p>
+          <a routerLink="/pessoas/new" class="btn btn-primary">Novo registro</a>
+        </p>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>e-mail</th>
+            <th>telefone</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let p of pessoas">
+            <th scope="row">{{p.id}}</th>
+            <td>{{p.nome}}</td>
+            <td>{{p.email}}</td>
+            <td>{{p.telefone}}</td>
+            <td>
+              <button type="button" class="btn btn-default" (click)="goToEdit(p)">
+                <span class=" glyphicon glyphicon-pencil"></span>
+              </button>
+              <button type="button" class="btn btn-danger" (click)="delete(p)">
+                <span class=" glyphicon glyphicon-trash"></span>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+  </div>
+</div>
